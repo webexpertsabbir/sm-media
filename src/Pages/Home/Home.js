@@ -1,9 +1,10 @@
 import React from 'react';
+import UploadOption from './UploadOption';
 
 const Home = () => {
     return (
-        <div>
-            <h2>This is Home page</h2>
+        <div className='max-w[1240px] mx-auto'>
+            <UploadOption></UploadOption>
         </div>
     );
 };
