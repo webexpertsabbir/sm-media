@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 import Loading from '../../Hooks/Loading';
 
 const UploadOption = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { user} = useContext(AuthContext);
+    // console.log(user)
+
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
     // const navigate = useNavigate();
@@ -33,28 +37,31 @@ const UploadOption = () => {
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    console.log(imgData.data.url);
-                    const doctor = {
-                        post: data.post,
-                        image: imgData.data.url
+                    // console.log(imgData.data.url);
+                    const mediaPost = {
+                        userName: user.displayName,
+                        userEmail: user.email,
+                        userImage: user.photoURL,
+                        userPost: data.post,
+                        postImage: imgData.data.url
                     }
-                    console.log(doctor)
+                    // console.log(mediaPost)
 
-                    // // save doctor information to the database
-                    // fetch('https://doctors-portal-server-rust.vercel.app/doctors', {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'content-type': 'application/json',
-                    //         authorization: `bearer ${localStorage.getItem('accessToken')}`
-                    //     },
-                    //     body: JSON.stringify(doctor)
-                    // })
-                    //     .then(res => res.json())
-                    //     .then(result => {
-                    //         console.log(result);
-                    //         toast.success(`${data.name} is added successfully`);
-                    //         // navigate('/dashboard/managedoctors')
-                    //     })
+                    // save doctor information to the database
+                    fetch('http://localhost:5000/posts', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(mediaPost)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            // console.log(result);
+                            reset();
+                            toast.success(`${user.displayName} your post added successfully`);
+                            // navigate('/dashboard/managedoctors')
+                        })
                 }
             })
     }
