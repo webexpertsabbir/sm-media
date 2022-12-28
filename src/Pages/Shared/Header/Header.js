@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
+import { FaUser } from 'react-icons/fa';
 
 const Header = () => {
 
@@ -51,7 +52,37 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="text-xl font-semibold">{user?.displayName}</a>
+                <div className='flex justify-start items-center'>
+
+                    {
+                        user?.uid ?
+                            <>
+                                {
+                                    user?.photoURL ?
+                                        <>
+                                            <div className="avatar online">
+                                                <div className="w-8 rounded-full">
+                                                    <img src={user.photoURL} alt={user.displayName} />
+                                                </div>
+                                            </div>
+                                        </>
+                                        :
+                                        <div className="avatar online">
+                                            <div className="w-8">
+                                                <FaUser></FaUser>
+                                            </div>
+                                        </div>
+
+                                }
+                            </>
+                            :
+                            <FaUser></FaUser>
+                    }
+
+
+                    <a className="text-xl font-semibold ml-3">{user?.displayName} </a>
+
+                </div>
             </div>
         </div>
     );

@@ -72,7 +72,7 @@ const UploadOption = () => {
 
     return (
         <div className='flex justify-center'>
-            <div className='md:w-1/2 p-7'>
+            <div className='md:w-1/2 p-7 border rounded'>
                 <h2 className="text-3xl text-center font-semibold uppercase">Create Your Post</h2>
                 <form onSubmit={handleSubmit(handleAddPost)}>
                     <div className="form-control w-full my-5">
@@ -86,7 +86,7 @@ const UploadOption = () => {
                         })} className="file-input file-input-bordered w-full" />
         
                     </div>
-                    <input className='btn btn-accent w-full mt-4' value="Publish" type="submit" />
+                    <input className='btn w-full mt-4' value="Publish" type="submit" />
                 </form>
             </div>
         </div>
