@@ -45,7 +45,9 @@ const UploadOption = () => {
                         userImage: user.photoURL,
                         userPost: data.post,
                         postImage: imgData.data.url,
-                        loveReact: 0,
+                        loveReact: {
+                            loveReactSum: 0,
+                        }
                     }
  
                     fetch('https://sm-media-server.vercel.app/posts', {
@@ -97,6 +99,7 @@ const UploadOption = () => {
                     posts.map(post => <Post
                         key={post._id}
                         post={post}
+                        refetch
                     ></Post>)
                 }
 

@@ -6,12 +6,13 @@ import { AuthContext } from '../../../Context/AuthProvider';
 
 
 const Post = ({ post }) => {
-    const { _id, userPost, userName, userImage, userEmail, postImage, loveReact } = post;
-    
-    const {user} = useContext(AuthContext);
+    console.log(post)
+    const { _id, userPost, userName, userImage, userEmail, postImage, loveReact, } = post;
 
-    const loveReactNew = parseInt(loveReact)
-    console.log(parseFloat(loveReact))
+    const { user } = useContext(AuthContext);
+
+    const loveReactNew = parseInt(loveReact.loveReactSum)
+    // console.log(parseFloat(loveReact))
 
     const loveReactSum = 1 + loveReactNew;
     console.log(loveReactSum)
@@ -19,11 +20,11 @@ const Post = ({ post }) => {
     const handleLoveReact = () => {
 
         const loveReactColection = {
-            loveReact: loveReactSum,
+            loveReactSum
         }
         // const loveReactSum = 1 + loveReact;
 
-        fetch(`http://localhost:5000/post/love/${_id}`, {
+        fetch(`https://sm-media-server.vercel.app/post/love/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -34,11 +35,37 @@ const Post = ({ post }) => {
             .then(result => {
                 console.log(result);
                 toast.success(`Love React successfully`);
-                // refetch();
                 // navigate('/dashboard/managedoctors')
             })
     }
 
+    // const handleLoveReact = () => {
+
+    //     // console.log(data)
+    //     const loveReactColection = {
+            
+    //         loveReactId: _id,
+    //         userName: user.displayName,
+    //         userEmail: user.email,
+    //         userImage: user.photoURL
+    //     }
+
+    //     fetch('http://localhost:5000/post/loverect', {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json',
+    //         },
+    //         body: JSON.stringify(loveReactColection)
+    //     })
+    //         .then(res => res.json())
+    //         .then(result => {
+    //             console.log(result);
+    //             // reset();
+    //             toast.success(`Love react successfully`);
+    //             // refetch();
+    //             // navigate('/dashboard/managedoctors')
+    //         })
+    // }
 
     return (
         <div>
@@ -76,7 +103,7 @@ const Post = ({ post }) => {
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                 Love
                             </button>
-                            <p className='text-center pt-2 font-semibold'>100 Love react</p>
+                            <p className='text-center pt-2 font-semibold'>{loveReact.loveReactSum} Love react</p>
                         </div>
 
                     </div>
