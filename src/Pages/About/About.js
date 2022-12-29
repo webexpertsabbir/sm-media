@@ -29,17 +29,18 @@ const About = () => {
             <div className='flex justify-center'>
                 <div className='md:w-1/2 p-7 border rounded py-48'>
                     <div className='text-center'>
-                        <h2 className='text-2xl'><span className='font-semibold'>Name:</span> {user?.displayName}</h2>
-                        <h2 className='pt-5'>Email: {user?.email}</h2>
+
                         <div>
                             {
                                 about.map((aboute, ids) => <div
                                     key={ids}
                                 >
-                                    <h2 className='py-2'>University: {aboute.university}</h2>
-                                    <h2>District: {aboute.district}</h2>
-                                    <h2 className='py-2'>Upojela: {aboute.upojela}</h2>
-                                    <h2>Village: {aboute.village}</h2>
+                                    <h2 className='text-2xl'><span className='font-semibold'>Name:</span> {aboute.name}</h2>
+                                    <h2 className='pt-5'><span className='font-semibold'>Email: </span>{aboute.email}</h2>
+                                    <h2 className='py-2'><span className='font-semibold'>University: </span> {aboute.university}</h2>
+                                    <h2><span className='font-semibold'>District: </span> {aboute.district}</h2>
+                                    <h2 className='py-2'><span className='font-semibold'>Upojela:  </span>{aboute.upojela}</h2>
+                                    <h2><span className='font-semibold'>Village: </span> {aboute.village}</h2>
                                 </div>)
                             }
                         </div>
