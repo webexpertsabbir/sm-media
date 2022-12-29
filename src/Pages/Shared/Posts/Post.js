@@ -1,10 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 
 const Post = ({ post }) => {
-    const { _id, userPost, userName, userImage, userEmail, postImage, } = post
+    const { _id, userPost, userName, userImage, userEmail, postImage, loveReact } = post;
+    
+    const {user} = useContext(AuthContext);
+
+    const loveReactNew = parseInt(loveReact)
+    console.log(parseFloat(loveReact))
+
+    const loveReactSum = 1 + loveReactNew;
+    console.log(loveReactSum)
+
+    const handleLoveReact = () => {
+
+        const loveReactColection = {
+            loveReact: loveReactSum,
+        }
+        // const loveReactSum = 1 + loveReact;
+
+        fetch(`http://localhost:5000/post/love/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(loveReactColection)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                toast.success(`Love React successfully`);
+                // refetch();
+                // navigate('/dashboard/managedoctors')
+            })
+    }
+
+
     return (
         <div>
             <div className='flex justify-center py-2'>
@@ -31,13 +66,13 @@ const Post = ({ post }) => {
                                 </div>
                                 <h2 className="card-title ml-5">{userName}</h2>
                             </div>
-                            <p className='pt-3'>{userPost.slice(0, 250)} <Link to={_id}><span className='text-red-600 font-semibold'>Read More ...</span></Link></p>
+                            <p className='pt-3'>{userPost.slice(0, 250)} <Link to={`/posts/${_id}`}><span className='text-red-600 font-semibold'>Read More ...</span></Link></p>
                         </div>
                         <img className='rounded' src={postImage} alt={userName} />
 
 
                         <div className='grid grid-cols-2 pt-2'>
-                            <button className="btn btn-secondary btn-sm gap-2">
+                            <button onClick={handleLoveReact} className="btn btn-secondary btn-sm gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                 Love
                             </button>

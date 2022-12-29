@@ -43,6 +43,10 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                if (loading) {
+                    <Loading></Loading>
+                }
+                navigate(from, { replace: true })
 
             })
             .catch(error => console.log(error))

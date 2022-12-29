@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <div className='max-w[1240px] mx-auto'>
             <UploadOption></UploadOption>
-            <Posts></Posts>
+            {/* <Posts></Posts> */}
         </div>
     );
 };
