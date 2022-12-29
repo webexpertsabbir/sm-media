@@ -6,7 +6,7 @@ import Post from './Post';
 
 const Posts = () => {
 
-    const { data: posts, isLoading } = useQuery({
+    const { data: posts, isLoading, refetch } = useQuery({
         queryKey: ['posts'],
         queryFn: async () => {
             const res = await fetch('https://sm-media-server.vercel.app/posts');
@@ -27,6 +27,7 @@ const Posts = () => {
                 posts.map(post =><Post 
                 key={post._id}
                 post={post}
+                refetch={refetch}
                 ></Post>)
             }
 

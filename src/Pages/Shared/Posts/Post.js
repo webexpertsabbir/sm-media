@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 
-const Post = ({ post }) => {
+const Post = ({ post, refetch }) => {
     console.log(post)
     const { _id, userPost, userName, userImage, userEmail, postImage, loveReact, } = post;
 
@@ -35,7 +35,6 @@ const Post = ({ post }) => {
             .then(result => {
                 console.log(result);
                 toast.success(`Love React successfully`);
-                // navigate('/dashboard/managedoctors')
             })
     }
 
@@ -63,7 +62,7 @@ const Post = ({ post }) => {
     //             // reset();
     //             toast.success(`Love react successfully`);
     //             // refetch();
-    //             // navigate('/dashboard/managedoctors')
+    //             
     //         })
     // }
 

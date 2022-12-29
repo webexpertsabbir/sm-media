@@ -77,7 +77,7 @@ const SingelPost = () => {
             .then(result => {
                 console.log(result);
                 toast.success(`Love React successfully`);
-                // navigate('/dashboard/managedoctors')
+                refetch()
             })
     }
 
