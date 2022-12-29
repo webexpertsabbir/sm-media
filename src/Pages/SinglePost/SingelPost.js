@@ -10,7 +10,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const SingelPost = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { _id, userPost, userName, userImage, userEmail, postImage, } = useLoaderData();
+    const { _id, userPost, userName, userImage, userEmail, postImage, loveReact } = useLoaderData();
 
     const { user } = useContext(AuthContext);
 
@@ -53,6 +53,33 @@ const SingelPost = () => {
             })
     }
 
+    const loveReactNew = parseInt(loveReact.loveReactSum)
+    // console.log(parseFloat(loveReact))
+
+    const loveReactSum = 1 + loveReactNew;
+    console.log(loveReactSum)
+
+    const handleLoveReact = () => {
+
+        const loveReactColection = {
+            loveReactSum
+        }
+        // const loveReactSum = 1 + loveReact;
+
+        fetch(`https://sm-media-server.vercel.app/post/love/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(loveReactColection)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                toast.success(`Love React successfully`);
+                // navigate('/dashboard/managedoctors')
+            })
+    }
 
 
     if (isLoading) {
@@ -93,11 +120,11 @@ const SingelPost = () => {
 
 
                             <div className='grid grid-cols-2 pt-2'>
-                                <button className="btn btn-secondary btn-sm gap-2">
+                                <button onClick={handleLoveReact} className="btn btn-secondary btn-sm gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                     Love
                                 </button>
-                                <p className='text-center pt-2 font-semibold'>100 Love react</p>
+                                <p className='text-center pt-2 font-semibold'>{loveReact.loveReactSum} Love react</p>
                             </div>
 
 
