@@ -93,7 +93,7 @@ const Login = () => {
                         {loginError && <p>{loginError}</p>}
                     </div>
                 </form>
-                <p className='py-5'>Car Dell <Link to='/signup' className='underline text-secondary'>Create a new account</Link></p>
+                <p className='py-5'>SM MEDIA <Link to='/signup' className='underline text-secondary'>Create a new account</Link></p>
                 <div className="divider">OR</div>
                 <button className='btn btn-outline btn-primary w-full' onClick={handelGoogleSignIn}>CONTINUE WITH GOOGLE</button>
             </div>

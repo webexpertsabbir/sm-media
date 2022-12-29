@@ -47,7 +47,7 @@ const SignUp = () => {
         //         .then(res => res.json())
         //         .then(data => {
         //             console.log(data)
-                    
+
         //             navigate('/');
         //         })
         // }
@@ -82,7 +82,7 @@ const SignUp = () => {
                         {errors.email && <p className='text-red-500' role="alert">{errors.email?.message}</p>}
 
                     </div>
-                    
+
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Password</span>
@@ -107,8 +107,9 @@ const SignUp = () => {
                     <input type="submit" value='Sign Up' className='btn btn-primary w-full' />
                     {signUpError && <p className='text-red-600'>{signUpError}</p>}
                 </form>
-                <p className='py-5'>Already have an account <Link to='/login' className='underline text-secondary'>Please Login</Link></p>
                 <div className="divider">OR</div>
+                <p className='py-5'>Already have an account <Link to='/login' className='underline text-secondary'>Please Login</Link></p>
+
             </div>
         </div>
     );
